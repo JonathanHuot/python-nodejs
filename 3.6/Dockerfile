@@ -8,6 +8,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN useradd -m docker && \
     echo "docker:docker" | chpasswd && \
-    adduser docker sudo
+    echo "docker ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/docker && \
+    chmod 0440 /etc/sudoers.d/docker
 
 USER docker
